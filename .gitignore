@@ -1,0 +1,11 @@
+.idea/
+.idea*
+build/
+dist/
+django_cern_oauth.egg-info/
+*~
+__pycache__
+*.pyc
+oauth2_sso.egg-info
+*.iml
+db.sqlite3
