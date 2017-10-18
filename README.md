@@ -71,7 +71,7 @@ OAUTH = {
     # User config (optional)
     'USER_CREATION_FUNCTION': 'path.to.extra_user_creation_function', # any function in pythonpath
     'GROUP_EXTRACTION_FUNCTION': 'ptah.to.group_extraction_fct', # any function in pythonpath
-    'USER_GROUP_MAPPINGS': [('it-dep-di-cso', ['Event reporters', 'Incident handlers', 'Incident viewers'])],
+    'USER_GROUP_MAPPINGS': [('sso-group', ['Event reporters', 'Incident handlers', 'Incident viewers'])],
     'USER_GROUPS_URL': '<group_info_api>',
     'USER_POST_LOGIN_INIT': 'some.path.init_session'
 }
