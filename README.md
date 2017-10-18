@@ -1,6 +1,6 @@
 # Django Oauth2 Client and User Configuration
 
-[![Travis CI build status](https://travis-ci.org/saibot94/django-oauth2-sso.svg?branch=master)](https://travis-ci.org/saibot94/django-oauth2-sso)
+Build status: [![Travis CI build status](https://travis-ci.org/saibot94/django-oauth2-sso.svg?branch=master)](https://travis-ci.org/saibot94/django-oauth2-sso)
 
 ## Motivation
 
