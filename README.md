@@ -96,7 +96,7 @@ This is a list of tuples, mapping from the JSON object that you get from calling
 Bearer < token >" and the Django user model that you've defined 
 
 
-###Optional user creation flow related configs:
+### Optional user creation flow related configs:
 
 - USER_CREATION_FUNCTION - once the user login is successful, there may be a need to add extra
 user information or create extra objects for the user. The function receives the request and 
