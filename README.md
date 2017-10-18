@@ -2,6 +2,7 @@
 
 Build status: [![Travis CI build status](https://travis-ci.org/saibot94/django-oauth2-sso.svg?branch=master)](https://travis-ci.org/saibot94/django-oauth2-sso)
 
+PyPI: [![PyPI package](https://badge.fury.io/py/oauth2_sso.svg)](https://pypi.python.org/pypi/oauth2_sso)
 ## Motivation
 
 SSO can be a tricky thing to setup, especially if your organization has a custom OAuth2 SSO provider that
