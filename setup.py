@@ -20,7 +20,7 @@ setup(
 
     description='Django OAuth 2 Authentication Made Easy',
 
-    url='https://gitlab.cern.ch/ischuszt/django-cern-oauth',
+    url='https://github.com/saibot94/django-oauth2-sso',
 
     author='Cristian Schuszter',
     author_email='cristian.schuszter@cern.ch',
