@@ -1,6 +1,5 @@
 language: python
 python:
-  - "2.6"
   - "2.7"
   - "3.2"
   - "3.3"
@@ -10,10 +9,11 @@ python:
   - "3.6"
   - "3.6-dev" # 3.6 development branch
   - "3.7-dev" # 3.7 development branch
-  - "nightly"
 # command to install dependencies
 install:
-  - python setup.py install && pip install -r test-requirements.txt
+  - pip install -r test-requirements.txt
+  - python setup.py install
+
 # command to run tests
 script:
   - python manage.py test
