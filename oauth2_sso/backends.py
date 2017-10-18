@@ -78,7 +78,7 @@ class OAuth2Backend(ModelBackend):
     def configure_user(self, user, user_info):
         for mapping in self.USER_FIELD_MAPPINGS:
             setattr(user, mapping[0], user_info[mapping[1]])
-        user.save(update_fields=map(lambda x: x[1], self.USER_FIELD_MAPPINGS))
+        user.save(update_fields=list(map(lambda x: x[1], self.USER_FIELD_MAPPINGS)))
         return user
 
     def get_or_create_user(self, user_info):

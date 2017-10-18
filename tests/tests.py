@@ -5,6 +5,8 @@ import mock
 import requests
 
 MOCK_USER_DATA = {"username": "user1", "email": 'email@example.com', 'first_name': 'User'}
+
+
 class MockResponse:
     def __init__(self, json_data, status_code):
         self.json_data = json_data
@@ -39,9 +41,11 @@ class OAuth2BackendTest(TestCase):
 
     def test_login_redirect(self):
         resp = self.client.get('/login/')
-        self.assertIs(True,
-                      resp.url == 'https://example.com?scope=read%3Auser&redirect_uri=https%3A%2F%2Ftest-django-app.com'
-                                  '&response_type=code&client_id=client')
+        self.assertTrue(resp.url.startswith('https://example.com?'))
+        self.assertTrue("scope=read%3Auser" in resp.url)
+        self.assertTrue("redirect_uri=https%3A%2F%2Ftest-django-app.com" in resp.url)
+        self.assertTrue("response_type=code" in resp.url)
+        self.assertTrue("client_id=client" in resp.url)
         self.assertIs(True, isinstance(resp, HttpResponseRedirect))
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
