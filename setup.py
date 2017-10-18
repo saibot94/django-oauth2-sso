@@ -16,7 +16,7 @@ here = path.abspath(path.dirname(__file__))
 setup(
     name='oauth2_sso',
 
-    version='0.0.1',
+    version='0.1',
 
     description='Django OAuth 2 Authentication Made Easy',
 
@@ -31,7 +31,7 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
 
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries :: Python Modules',
@@ -56,7 +56,8 @@ setup(
     ],
 
     install_requires=['requests>=2.0.0', 'Django>=1.6'],
-    keywords='Django OAuth2 OAuth SSO',
+    keywords=['Django', 'user', 'management', 'sign-up', 'user sync', 'authentication', 'authorization', 'OAuth',
+              'SSO'],
     packages=find_packages(exclude=('tests*', '*tests', 'tests')),
     include_package_data=True,
 )
