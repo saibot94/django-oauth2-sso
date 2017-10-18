@@ -36,7 +36,7 @@ setup(
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries :: Python Modules',
 
-        'License :: OSI Approved :: MIT Software License',
+        'License :: OSI Approved :: MIT License',
 
         'Framework :: Django :: 1.5',
         'Framework :: Django :: 1.6',
