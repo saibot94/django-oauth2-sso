@@ -57,5 +57,5 @@ setup(
               'SSO'],
     packages=find_packages(exclude=('tests*', '*tests', 'tests')),
     include_package_data=True,
-    download_url='https://github.com/saibot94/django-oauth2-sso/archive/0.1.tar.gz'
+    download_url='https://github.com/saibot94/django-oauth2-sso/archive/0.3.3.tar.gz'
 )
