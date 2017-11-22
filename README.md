@@ -50,10 +50,12 @@ urlpatterns = [
     # ...
 ]
 ```
-Step 3: Add the LOGIN_URL and corresponding OAUTH config object for your application. Example:
+Step 3: Add the LOGIN_URL and corresponding OAUTH config object for your application. 
+Also add the ALTERNATE_LOGIN_URL as a fallback in case OAuth authentication fails. Example:
 
 ```python
 LOGIN_URL = "/oauth/login/" # different from your ModelBackend auth
+ALTERNATE_LOGIN_URL = "/login/"
 
 OAUTH = {
     'CLIENT_ID': 'my-id',
@@ -106,7 +108,7 @@ user information or create extra objects for the user. The function receives the
 user object. The modified user is returned.
 - GROUP_EXTRACTION_FUNCTION - if the *USER_GROUPS_URL* is defined, this function is loaded and used to parse
 the response from the groups url. It should return a list of strings, defining the groups to which the user
-belongs in the SSO authority.
+belongs in the SSO authority. The function gets passed 3 params: the request, the user and the groups response.
 - USER_GROUP_MAPPINGS - if the USER_GROUPS_URL and extraction function are defined, the backend looks up 
 all the SSO groups that the user belongs to and maps that user to the list of groups defined by the second
 parameter in the tuple (application groups).

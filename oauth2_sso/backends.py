@@ -95,12 +95,10 @@ class OAuth2Backend(ModelBackend):
         user_groups_response = requests.get(self.USER_GROUPS_URL,
                                             headers={'Authorization': 'Bearer ' + self.access_token})
         if user_groups_response.status_code == 200:
-            groups = import_from(self.GROUP_EXTRACTION_FUNCTION)(self.request, user_groups_response.json())
+            groups = import_from(self.GROUP_EXTRACTION_FUNCTION)(self.request, user, user_groups_response.json())
             # get groups that were received in the response
-            print('groups: {}'.format(groups))
             parsed_groups = filter(lambda x: x[0] in groups,
                                    self.USER_GROUP_MAPPINGS)
-            print('parsed groups: {}'.format(str(parsed_groups)))
             for group in parsed_groups:
                 for domain_group in group[1]:
                     g = Group.objects.get(name=domain_group)

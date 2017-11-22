@@ -21,10 +21,14 @@ def authenticate_code(request):
             login(request, user)
             if 'USER_POST_LOGIN_INIT' in settings.OAUTH:
                 import_from(settings.OAUTH['USER_POST_LOGIN_INIT'])(request)
+            if 'next' in request.session:
+                redir_url = request.session['next']
+                request.session['next'] = None
+                return redirect(redir_url)
             return redirect(settings.OAUTH['LOGIN_COMPLETE_REDIRECT'])
         else:
-            print("Not logged in")
-            return redirect(settings.LOGIN_URL)
+            print("Not logged in, redirecting")
+            return redirect(settings.ALTERNATE_LOGIN_URL)
 
 
 def redirect_to_login(request):
@@ -35,4 +39,6 @@ def redirect_to_login(request):
         'redirect_uri': settings.OAUTH['REDIRECT_URI'],
         'client_id': settings.OAUTH['CLIENT_ID']
     }
+    if 'next' in request.GET:
+        request.session['next'] = request.GET['next']
     return redirect(auth_url + '?' + urlencode(data))
