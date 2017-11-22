@@ -21,9 +21,9 @@ def authenticate_code(request):
             login(request, user)
             if 'USER_POST_LOGIN_INIT' in settings.OAUTH:
                 import_from(settings.OAUTH['USER_POST_LOGIN_INIT'])(request)
-            if 'next' in request.session:
+            if 'next' in request.session and request.session['next']:
                 redir_url = request.session['next']
-                request.session['next'] = None
+                del request.session['your key']
                 return redirect(redir_url)
             return redirect(settings.OAUTH['LOGIN_COMPLETE_REDIRECT'])
         else:
