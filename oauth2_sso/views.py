@@ -23,7 +23,7 @@ def authenticate_code(request):
                 import_from(settings.OAUTH['USER_POST_LOGIN_INIT'])(request)
             if 'next' in request.session and request.session['next']:
                 redir_url = request.session['next']
-                del request.session['your key']
+                del request.session['next']
                 return redirect(redir_url)
             return redirect(settings.OAUTH['LOGIN_COMPLETE_REDIRECT'])
         else:
