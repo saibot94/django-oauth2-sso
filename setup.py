@@ -16,7 +16,7 @@ here = path.abspath(path.dirname(__file__))
 setup(
     name='oauth2_sso',
 
-    version='0.4.0',
+    version='0.4.1',
 
     description='Django OAuth 2 Authentication Made Easy',
 

@@ -3,8 +3,8 @@ from django.utils.http import urlencode
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect
-from django.core.urlresolvers import reverse
 
+from django.urls import reverse
 from django.conf import settings
 
 from .backends import import_from
