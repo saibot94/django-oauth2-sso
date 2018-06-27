@@ -1,23 +1,29 @@
+from __future__ import absolute_import
+
 from importlib import import_module
 
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import Group
 import requests
 
-UserModel = get_user_model()
+from oauth2_sso.helpers import get_django_setting_or_default
 
 
 def import_from(full_name):
+    """
+    Import a function from a full module path
+    @param full_name: The path to the module / function to import
+    """
     module_name, function_name = full_name.rsplit('.', 1)
     mod = import_module(module_name)
     return getattr(mod, function_name)
 
 
 def _get_oauth_setting_or_none(setting_name):
-    if setting_name in settings.OAUTH:
-        return settings.OAUTH[setting_name]
+    oauth_settings = get_django_setting_or_default('OAUTH', dict())
+    if setting_name in oauth_settings:
+        return oauth_settings[setting_name]
     else:
         return None
 
@@ -37,10 +43,11 @@ class OAuth2Backend(ModelBackend):
     USER_GROUP_MAPPINGS = _get_oauth_setting_or_none('USER_GROUP_MAPPINGS')
     USER_FIELD_MAPPINGS = _get_oauth_setting_or_none('USER_FIELD_MAPPINGS')
     USERNAME_FIELD = _get_oauth_setting_or_none('USERNAME_FIELD')
-
+    
     def __init__(self):
         self.access_token = None
         self.request = None
+        self.UserModel = get_user_model()
 
     def authenticate(self, request=None, code=None, **kwargs):
         if code is None or request is None:
@@ -83,11 +90,11 @@ class OAuth2Backend(ModelBackend):
 
     def get_or_create_user(self, user_info):
         try:
-            user = UserModel._default_manager.get_by_natural_key(user_info[self.USERNAME_FIELD])
+            user = self.UserModel._default_manager.get_by_natural_key(user_info[self.USERNAME_FIELD])
             return self.configure_user(user, user_info)
-        except UserModel.DoesNotExist:
-            user, created = UserModel._default_manager.get_or_create(
-                **{UserModel.USERNAME_FIELD: user_info[self.USERNAME_FIELD]})
+        except self.UserModel.DoesNotExist:
+            user, created = self.UserModel._default_manager.get_or_create(
+                **{self.UserModel.USERNAME_FIELD: user_info[self.USERNAME_FIELD]})
             if created:
                 return self.configure_user(user, user_info)
 

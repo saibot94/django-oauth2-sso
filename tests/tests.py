@@ -1,8 +1,15 @@
-from django.http.response import HttpResponseRedirect
-from django.test import TestCase, Client
+from __future__ import absolute_import
+
+from django.http.response import HttpResponseRedirect, HttpResponse
+from django.test import TestCase, Client, override_settings
 from django.contrib.auth.admin import User
 import mock
 import requests
+import logging 
+
+from django.conf import settings
+
+from oauth2_sso.helpers import get_django_setting_or_default
 
 MOCK_USER_DATA = {"username": "user1", "email": 'email@example.com', 'first_name': 'User'}
 
@@ -57,3 +64,21 @@ class OAuth2BackendTest(TestCase):
         self.assertIs(True, 'email@example.com' == created_user.email)
         self.assertIs(True, 'user1' == created_user.username)
         self.assertIs(True, 'User' == created_user.first_name)
+
+    @override_settings()
+    def test_login_error_response_misconfigured(self):
+        del settings.OAUTH
+        resp = self.client.get('/login/')
+        self.assertTrue(isinstance(resp, HttpResponse))
+        self.assertEqual(500, resp.status_code)
+
+
+class HelperTest(TestCase):
+
+    @override_settings()
+    def test_no_oauth_setting(self):
+        del settings.OAUTH
+        self.assertTrue(get_django_setting_or_default('OAUTH', 'TEST') == 'TEST')
+    
+    def test_with_oauth_seting(self):
+        self.assertFalse(get_django_setting_or_default('OAUTH', 'TEST') == 'TEST')

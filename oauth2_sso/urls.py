@@ -1,5 +1,7 @@
+from __future__ import absolute_import
+
 from django.conf.urls import url
-from . import views
+from oauth2_sso import views
 
 app_name = 'oauth2_sso'
 
